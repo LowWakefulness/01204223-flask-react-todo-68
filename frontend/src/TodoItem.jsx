@@ -10,11 +10,7 @@ function TodoItem({todo, toggleDone, deleteTodo, addNewComment}) {
             <button onClick={() => {toggleDone(todo.id)}}>Toggle</button>
             <button onClick={() => {deleteTodo(todo.id)}}>❌</button>
             
-            {/* Logic: 
-                - ถ้ามีคอมเมนต์ (length > 0): แสดงรายการคอมเมนต์
-                - ถ้าไม่มี: แสดงคำว่า No comments 
-                (ใช้ Ternary Operator แบบนี้จะทำให้ <p>No comments</p> หายไปจาก DOM จริงๆ เมื่อมีคอมเมนต์)
-            */}
+            
             {(todo.comments && todo.comments.length > 0) ? (
                 <>
                     <b>Comments ({todo.comments.length}):</b>

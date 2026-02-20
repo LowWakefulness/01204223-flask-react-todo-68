@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import App from '../App.jsx'
 
+
 const mockResponse = (body, ok = true) =>
   Promise.resolve({
     ok,
