@@ -6,7 +6,6 @@ import TodoItem from './TodoItem.jsx'
 
 function App() {
   const TODOLIST_API_URL = 'http://localhost:5000/api/todos/';
-  const [newComments, setNewComments] = useState({});
   const [todoList, setTodoList] = useState([]);
   const [newTitle, setNewTitle] = useState("");
 
@@ -75,7 +74,7 @@ function App() {
     }
   }
 
-  async function addNewComment(todoId) {
+  async function addNewComment(todoId, message) {
     try {
       const url = `${TODOLIST_API_URL}${todoId}/comments/`;
       const response = await fetch(url, {
@@ -83,7 +82,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 'message': newComments[todoId] || "" }),
+        body: JSON.stringify({ 'message': message }),
       });
       if (response.ok) {
         await fetchTodoList();
