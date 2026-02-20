@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react'
 import { expect } from 'vitest'
 import TodoItem from '../TodoItem.jsx'
 
-const baseTodo = {
-    id: 1,
+const baseTodo = {             // ** TodoItem พื้นฐานสำหรับทดสอบ
+  id: 1,
   title: 'Sample Todo',
   done: false,
   comments: [],
@@ -11,12 +11,12 @@ const baseTodo = {
 
 describe('TodoItem', () => {
   it('renders with no comments correctly', () => {    
+    // *** โค้ดสำหรับเทสที่เพิ่มเข้ามา
     render(
       <TodoItem todo={baseTodo} />
     );
     expect(screen.getByText('Sample Todo')).toBeInTheDocument();
   });
-
   it('renders with comments correctly', () => {
     const todoWithComment = {
       ...baseTodo,
@@ -29,5 +29,12 @@ describe('TodoItem', () => {
       <TodoItem todo={todoWithComment} />
     );
     expect(screen.getByText('Sample Todo')).toBeInTheDocument();
+    expect(screen.getByText('First comment')).toBeInTheDocument();
+    expect(screen.getByText('Another comment')).toBeInTheDocument();
+    
+    //
+    // *** TODO: ให้เพิ่ม assertion ว่ามีข้อความ First comment และ Another comment บนหน้าจอ
+    //
   });
+  
 });
