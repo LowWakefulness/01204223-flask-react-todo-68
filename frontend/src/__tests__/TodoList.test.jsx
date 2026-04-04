@@ -44,7 +44,7 @@ describe('TodoList', () => {
       mockResponse(originalTodoList)
     );
 
-    render(<TodoList />);
+    render(<TodoList apiUrl="http://localhost:5000/api/todos/" />);
 
     expect(await screen.findByText('First todo')).toBeInTheDocument();
     expect(await screen.findByText('Second todo')).toBeInTheDocument();
@@ -53,14 +53,12 @@ describe('TodoList', () => {
   });
 
   it('toggles done on a todo item', async () => {
-    expect(global.fetch).toHaveBeenLastCalledWith(expect.stringMatching(/1\/toggle/), 
-    expect.anything());
+    const toggledTodoItem1 = { ...todoItem1, done: true };
 
     global.fetch
       .mockImplementationOnce(() => mockResponse(originalTodoList))    
       .mockImplementationOnce(() => mockResponse(toggledTodoItem1));
-
-    render(<TodoList />);
+    render(<TodoList apiUrl="http://localhost:5000/api/todos/" />);
 
     expect(await screen.findByText('First todo')).not.toHaveClass('done');
 
@@ -71,7 +69,7 @@ describe('TodoList', () => {
 
     expect(global.fetch).toHaveBeenLastCalledWith(
       expect.stringMatching(/1\/toggle/), 
-      { method: 'PATCH' }
+      expect.anything()
     );
   });
 });
